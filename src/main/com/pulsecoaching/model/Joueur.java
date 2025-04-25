@@ -18,6 +18,8 @@ public class Joueur {
     private int taille;
     private int poids;
 
+    private int forme = 100;
+
     private Set<Position> positions;
 
     // Constructeur builder
@@ -28,6 +30,8 @@ public class Joueur {
         private String nationalite;
         private int taille;
         private int poids;
+
+        private int forme = 100;
 
         private Set<Position> positions = new LinkedHashSet<>();
 
@@ -67,6 +71,12 @@ public class Joueur {
             return this;
         }
 
+        // Forme du joueur
+        public JoueurBuilder forme(int forme) {
+            this.forme = forme;
+            return this;
+        }
+
         // Positions du joueur
         public JoueurBuilder ajouterPosition(Position position) {
             // Vérification de la position
@@ -94,6 +104,8 @@ public class Joueur {
             joueur.taille = taille;
             joueur.poids = poids;
 
+            joueur.forme = forme;
+
             // Vérification si le joueur a au moins une position
             if (positions.isEmpty()) {
                 throw new IllegalStateException("Un joueur doit avoir au moins une position.");
@@ -104,6 +116,30 @@ public class Joueur {
         }
     }
 
+    /**
+     * jouerMatch
+     * Réduit la forme du joueur de 30% après un match.
+     */
+    public void realiserMatch(){
+        this.forme = Math.max(this.forme - 30, 0);
+    }
+
+    /**
+     * realiserEntrainement
+     * Diminue la forme du joueur de 10% après un entraînement.
+     */
+    public void realiserEntrainement(){
+        this.forme = Math.max(this.forme - 10, 0);
+    }
+
+    /**
+     * realiserRepos
+     * Restaure la forme du joueur de 20% après un repos.
+     */
+    public void realiserRepos(){
+        this.forme = Math.min(this.forme + 20, 100);
+    }
+    
     /**
      * toString
      * Représente le joueur sous forme de chaîne de caractères.
@@ -117,6 +153,7 @@ public class Joueur {
         .append(", nationalité ").append(nationalite)
         .append(", taille ").append(taille).append("cm")
         .append(", poids ").append(poids).append("kg")
+        .append(", forme ").append(forme).append("%")
         .append(". Positions : ");
         for (Position position : positions) {
             sb.append(position.toString()).append(", ");
