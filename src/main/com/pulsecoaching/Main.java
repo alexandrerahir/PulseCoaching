@@ -25,19 +25,31 @@ public class Main {
         Position positionAD = new Position("Ailier droit", "AD");
         Position positionAG = new Position("Ailier gauche", "AG");
 
-        // Création d'un joueur avec le constructeur builder
-        Joueur joueur = new Joueur.JoueurBuilder()
-                .nom("Dupont")
-                .prenom("Jean")
-                .naissance(LocalDate.of(1990, 5, 15))
+        // // Création d'un joueur avec le constructeur builder
+        // Joueur joueur = new Joueur.JoueurBuilder()
+        //         .nom("Dupont")
+        //         .prenom("Jean")
+        //         .naissance(LocalDate.of(1990, 5, 15))
+        //         .nationalite("Française")
+        //         .taille(180)
+        //         .poids(75)
+        //         .ajouterPosition(positionAD)
+        //         .ajouterPosition(positionAD)
+        //         .build();
+
+        // // Affichage des informations du joueur
+        // System.out.println(joueur.toString());
+
+        // Creation d'un entraîneur avec le constructeur builder
+        Entraineur entraineur = new Entraineur.EntraineurBuilder()
+                .nom("Martin")
+                .prenom("Pierre")
+                .naissance(LocalDate.of(1985, 3, 20))
                 .nationalite("Française")
-                .taille(180)
-                .poids(75)
-                .ajouterPosition(positionAD)
-                .ajouterPosition(positionAD)
+                .fonction("Entraîneur principal")
                 .build();
 
-        // Affichage des informations du joueur
-        System.out.println(joueur.toString());
+        // Affichage des informations de l'entraîneur
+        System.out.println(entraineur.toString());
     }
 }
