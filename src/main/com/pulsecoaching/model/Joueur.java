@@ -110,6 +110,11 @@ public class Joueur extends Personne {
      * Diminue l'endurance du joueur de 40% et augmente sa qualité de 5%.
      */
     public void realiserMatch() {
+        // Vérification de l'endurance
+        if (this.endurance < 50) {
+            System.out.println("Le joueur est trop fatigué pour jouer un match.");
+            return;
+        }
         this.endurance = Math.max(this.endurance - 40, 0);
         this.qualite = Math.min(this.qualite + 5, 100);
     }
@@ -119,6 +124,11 @@ public class Joueur extends Personne {
      * Diminue l'endurance du joueur de 20% et augmente sa qualité de 7%.
      */
     public void realiserEntrainement() {
+        // Vérification de l'endurance
+        if (this.endurance < 30) {
+            System.out.println("Le joueur est trop fatigué pour s'entraîner.");
+            return;
+        }
         this.endurance = Math.max(this.endurance - 20, 0);
         this.qualite = Math.min(this.qualite + 7, 100);
     }
