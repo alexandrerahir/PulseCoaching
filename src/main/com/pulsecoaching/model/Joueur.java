@@ -10,28 +10,34 @@ import java.util.Set;
  * Classe Joueur
  * Représente un joueur de football.
  */
-public class Joueur {
-    private String nom;
-    private String prenom;
-    private LocalDate naissance;
-    private String nationalite;
+public class Joueur extends Personne {
     private int taille;
     private int poids;
-
-    private int forme = 100;
+    private int endurance;
+    private int qualite;
 
     private Set<Position> positions;
 
+    // Constructeur
+    private Joueur(JoueurBuilder builder) {
+        super(builder.nom, builder.prenom, builder.naissance, builder.nationalite);
+        this.taille = builder.taille;
+        this.poids = builder.poids;
+        this.endurance = builder.endurance;
+        this.qualite = builder.qualite;
+        this.positions = builder.positions;
+    }
+
     // Constructeur builder
-    public static class JoueurBuilder{
+    public static class JoueurBuilder {
         private String nom;
         private String prenom;
         private LocalDate naissance;
         private String nationalite;
         private int taille;
         private int poids;
-
-        private int forme = 100;
+        private int endurance = 100;
+        private int qualite = 0;
 
         private Set<Position> positions = new LinkedHashSet<>();
 
@@ -71,19 +77,8 @@ public class Joueur {
             return this;
         }
 
-        // Forme du joueur
-        public JoueurBuilder forme(int forme) {
-            this.forme = forme;
-            return this;
-        }
-
         // Positions du joueur
         public JoueurBuilder ajouterPosition(Position position) {
-            // Vérification de la position
-            if (this.positions.contains(position)) {
-                return this; // ignoré silencieusement si déjà présent
-            }
-
             // Vérification du nombre de positions
             if (this.positions.size() >= 3) {
                 throw new IllegalArgumentException("Un joueur ne peut avoir que 3 positions maximum.");
@@ -94,52 +89,49 @@ public class Joueur {
             return this;
         }
 
-        // Méthode de construction du joueur
+        // Construction du joueur
         public Joueur build() {
-            Joueur joueur = new Joueur();
-            joueur.nom = nom;
-            joueur.prenom = prenom;
-            joueur.naissance = naissance;
-            joueur.nationalite = nationalite;
-            joueur.taille = taille;
-            joueur.poids = poids;
-
-            joueur.forme = forme;
-
-            // Vérification si le joueur a au moins une position
+            // Véfication si le joueur a au moins une position
             if (positions.isEmpty()) {
                 throw new IllegalStateException("Un joueur doit avoir au moins une position.");
             }
-            joueur.positions = this.positions;
 
-            return joueur;
+            return new Joueur(this);
         }
+
     }
 
+
+
+    // Méthodes de la classe Joueur
+
     /**
-     * jouerMatch
-     * Réduit la forme du joueur de 30% après un match.
+     * realiserMatch
+     * Diminue l'endurance du joueur de 40% et augmente sa qualité de 5%.
      */
-    public void realiserMatch(){
-        this.forme = Math.max(this.forme - 30, 0);
+    public void realiserMatch() {
+        this.endurance = Math.max(this.endurance - 40, 0);
+        this.qualite = Math.min(this.qualite + 5, 100);
     }
 
     /**
      * realiserEntrainement
-     * Diminue la forme du joueur de 10% après un entraînement.
+     * Diminue l'endurance du joueur de 20% et augmente sa qualité de 7%.
      */
-    public void realiserEntrainement(){
-        this.forme = Math.max(this.forme - 10, 0);
+    public void realiserEntrainement() {
+        this.endurance = Math.max(this.endurance - 20, 0);
+        this.qualite = Math.min(this.qualite + 7, 100);
     }
 
     /**
      * realiserRepos
-     * Restaure la forme du joueur de 20% après un repos.
+     * Augmente l'endurance du joueur de 30% et diminue sa qualité de 3%.
      */
-    public void realiserRepos(){
-        this.forme = Math.min(this.forme + 20, 100);
+    public void realiserRepos() {
+        this.endurance = Math.min(this.endurance + 30, 100);
+        this.qualite = Math.max(this.qualite - 3, 0);
     }
-    
+
     /**
      * toString
      * Représente le joueur sous forme de chaîne de caractères.
@@ -153,7 +145,8 @@ public class Joueur {
         .append(", nationalité ").append(nationalite)
         .append(", taille ").append(taille).append("cm")
         .append(", poids ").append(poids).append("kg")
-        .append(", forme ").append(forme).append("%")
+        .append(", endurance ").append(endurance).append("%")
+        .append(", qualité ").append(qualite).append("%")
         .append(". Positions : ");
         for (Position position : positions) {
             sb.append(position.toString()).append(", ");
@@ -161,5 +154,5 @@ public class Joueur {
 
         return sb.toString().substring(0, sb.length() - 2);
     }
-
+    
 }

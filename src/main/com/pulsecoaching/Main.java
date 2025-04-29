@@ -25,18 +25,19 @@ public class Main {
         Position positionAD = new Position("Ailier droit", "AD");
         Position positionAG = new Position("Ailier gauche", "AG");
 
-        Joueur joueur1 = new Joueur.JoueurBuilder()
-            .nom("Dupont")
-            .prenom("Jean")
-            .naissance(LocalDate.of(1990, 5, 15))
-            .nationalite("Française")
-            .taille(180)
-            .poids(75)
-            .ajouterPosition(positionAG)
-            .ajouterPosition(positionBU)
-            .ajouterPosition(positionAG)
-            .build();
-        
-        System.out.println(joueur1.toString());
+        // Création d'un joueur avec le constructeur builder
+        Joueur joueur = new Joueur.JoueurBuilder()
+                .nom("Dupont")
+                .prenom("Jean")
+                .naissance(LocalDate.of(1990, 5, 15))
+                .nationalite("Française")
+                .taille(180)
+                .poids(75)
+                .ajouterPosition(positionAD)
+                .ajouterPosition(positionAD)
+                .build();
+
+        // Affichage des informations du joueur
+        System.out.println(joueur.toString());
     }
 }
