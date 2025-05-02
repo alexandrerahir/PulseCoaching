@@ -25,20 +25,28 @@ public class Main {
         Position positionAD = new Position("Ailier droit", "AD");
         Position positionAG = new Position("Ailier gauche", "AG");
 
-        // // Création d'un joueur avec le constructeur builder
-        // Joueur joueur = new Joueur.JoueurBuilder()
-        //         .nom("Dupont")
-        //         .prenom("Jean")
-        //         .naissance(LocalDate.of(1990, 5, 15))
-        //         .nationalite("Française")
-        //         .taille(180)
-        //         .poids(75)
-        //         .ajouterPosition(positionAD)
-        //         .ajouterPosition(positionAD)
-        //         .build();
-
-        // // Affichage des informations du joueur
-        // System.out.println(joueur.toString());
+        // Création d'un joueur avec le constructeur builder
+        Joueur joueur = new Joueur.JoueurBuilder()
+                .nom("Dupont")
+                .prenom("Jean")
+                .naissance(LocalDate.of(1990, 5, 15))
+                .nationalite("Française")
+                .taille(180)
+                .poids(75)
+                .ajouterPosition(positionAD)
+                .ajouterPosition(positionAD)
+                .build();
+        
+        Joueur joueur2 = new Joueur.JoueurBuilder()
+                .nom("Alexandre")
+                .prenom("Paul")
+                .naissance(LocalDate.of(1990, 5, 15))
+                .nationalite("Française")
+                .taille(180)
+                .poids(75)
+                .ajouterPosition(positionAD)
+                .ajouterPosition(positionAD)
+                .build();
 
         // Creation d'un entraîneur avec le constructeur builder
         Entraineur entraineur = new Entraineur.EntraineurBuilder()
@@ -49,7 +57,19 @@ public class Main {
                 .fonction("Entraîneur principal")
                 .build();
 
-        // Affichage des informations de l'entraîneur
-        System.out.println(entraineur.toString());
+        // Création d'une équipe avec le constructeur builder
+        Equipe equipe = new Equipe.EquipeBuilder()
+                .nom("Les Bleus")
+                .abreviation("FR")
+                .entraineur(entraineur)
+                .joueurs(Arrays.asList(joueur))
+                .build();
+        
+        equipe.ajouterJoueur(joueur2);
+        equipe.supprimerJoueur(joueur);
+
+        // Affichage des informations de l'équipe
+        System.out.println(equipe.toString());
+
     }
 }
