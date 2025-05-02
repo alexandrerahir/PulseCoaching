@@ -63,6 +63,8 @@ public class Equipe {
     /**
      * ajouterJoueur
      * Ajoute un joueur à l'équipe.
+     * 
+     * @param joueur
      */
     public void ajouterJoueur(Joueur joueur) {
         joueurs.add(joueur);
@@ -71,9 +73,31 @@ public class Equipe {
     /**
      * supprimerJoueur
      * Supprime un joueur de l'équipe.
+     * 
+     * @param joueur
      */
     public void supprimerJoueur(Joueur joueur) {
         joueurs.remove(joueur);
+    }
+
+    /**
+     * ajouterEntraineur
+     * Ajoute un entraîneur à l'équipe.
+     * 
+     * @param entraineur
+     */
+    public void ajouterEntraineur(Entraineur entraineur) {
+        this.entraineur = entraineur;
+    }
+    
+    /**
+     * supprimerEntraineur
+     * Supprime l'entraîneur de l'équipe.
+     * 
+     *  @param entraineur
+     */
+    public void supprimerEntraineur() {
+        this.entraineur = null;
     }
 
     /**

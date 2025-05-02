@@ -20,7 +20,7 @@ public class Joueur extends Personne {
 
     // Constructeur
     private Joueur(JoueurBuilder builder) {
-        super(builder.nom, builder.prenom, builder.naissance, builder.nationalite);
+        super(builder.nom, builder.prenom, builder.naissance, builder.nationalite, builder.equipe);
         this.taille = builder.taille;
         this.poids = builder.poids;
         this.endurance = builder.endurance;
@@ -34,6 +34,7 @@ public class Joueur extends Personne {
         private String prenom;
         private LocalDate naissance;
         private String nationalite;
+        private Equipe equipe;
         private int taille;
         private int poids;
         private int endurance = 100;
@@ -62,6 +63,12 @@ public class Joueur extends Personne {
         // Nationalité du joueur
         public JoueurBuilder nationalite(String nationalite) {
             this.nationalite = nationalite;
+            return this;
+        }
+
+        // Équipe du joueur
+        public JoueurBuilder equipe(Equipe equipe) {
+            this.equipe = equipe;
             return this;
         }
 
@@ -96,7 +103,14 @@ public class Joueur extends Personne {
                 throw new IllegalStateException("Un joueur doit avoir au moins une position.");
             }
 
-            return new Joueur(this);
+            Joueur joueur = new Joueur(this);
+
+            // Ajouter le joueur à l'équipe si l'équipe n'est pas null
+            if (this.equipe != null) {
+                this.equipe.ajouterJoueur(joueur);
+            }
+
+            return joueur;
         }
 
     }

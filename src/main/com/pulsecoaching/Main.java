@@ -25,6 +25,12 @@ public class Main {
         Position positionAD = new Position("Ailier droit", "AD");
         Position positionAG = new Position("Ailier gauche", "AG");
 
+        // Création d'une équipe avec le constructeur builder
+        Equipe equipe = new Equipe.EquipeBuilder()
+        .nom("Les Bleus")
+        .abreviation("FR")
+        .build();
+
         // Création d'un joueur avec le constructeur builder
         Joueur joueur = new Joueur.JoueurBuilder()
                 .nom("Dupont")
@@ -42,6 +48,7 @@ public class Main {
                 .prenom("Paul")
                 .naissance(LocalDate.of(1990, 5, 15))
                 .nationalite("Française")
+                .equipe(equipe)
                 .taille(180)
                 .poids(75)
                 .ajouterPosition(positionAD)
@@ -56,17 +63,7 @@ public class Main {
                 .nationalite("Française")
                 .fonction("Entraîneur principal")
                 .build();
-
-        // Création d'une équipe avec le constructeur builder
-        Equipe equipe = new Equipe.EquipeBuilder()
-                .nom("Les Bleus")
-                .abreviation("FR")
-                .entraineur(entraineur)
-                .joueurs(Arrays.asList(joueur))
-                .build();
         
-        equipe.ajouterJoueur(joueur2);
-        equipe.supprimerJoueur(joueur);
 
         // Affichage des informations de l'équipe
         System.out.println(equipe.toString());

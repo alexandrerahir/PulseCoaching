@@ -13,7 +13,7 @@ public class Entraineur extends Personne {
     
     // Constructeur
     public Entraineur(EntraineurBuilder builder) {
-        super(builder.nom, builder.prenom, builder.naissance, builder.nationalite);
+        super(builder.nom, builder.prenom, builder.naissance, builder.nationalite, builder.equipe);
         this.fonction = builder.fonction;
     }
 
@@ -23,6 +23,7 @@ public class Entraineur extends Personne {
         private String prenom;
         private LocalDate naissance;
         private String nationalite;
+        private Equipe equipe;
         private String fonction;
 
         // Nom de l'entraîneur
@@ -49,6 +50,12 @@ public class Entraineur extends Personne {
             return this;
         }
 
+        // Équipe de l'entraîneur
+        public EntraineurBuilder equipe(Equipe equipe) {
+            this.equipe = equipe;
+            return this;
+        }
+
         // Spécialité de l'entraîneur
         public EntraineurBuilder fonction(String fonction) {
             this.fonction = fonction;
@@ -57,11 +64,20 @@ public class Entraineur extends Personne {
 
         // Méthode pour construire l'objet Entraineur
         public Entraineur build() {
-            return new Entraineur(this);
+            Entraineur entraineur = new Entraineur(this);
+
+            // Ajouter le joueur à l'équipe si l'équipe n'est pas null
+            if (this.equipe != null) {
+                this.equipe.ajouterEntraineur(entraineur);
+            }
+
+            return entraineur;
         }
+        
     }
 
 
+    // Methodes de la classe Entraineur
 
     /**
      * toString
