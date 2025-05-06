@@ -107,40 +107,80 @@ public class Joueur extends Personne {
     // Méthodes de la classe Joueur
 
     /**
-     * realiserMatch
-     * Diminue l'endurance du joueur de 40% et augmente sa qualité de 5%.
+     * augmenterEndurance
+     * Augmente l'endurance du joueur d'un pourcentage donné.
+     * 
+     * @param pourcentage 
+     * @throws IllegalArgumentException si le pourcentage est inférieur à 0 ou supérieur à 100
      */
-    public void realiserMatch() {
-        // Vérification de l'endurance
-        if (this.endurance < 50) {
-            System.out.println("Le joueur est trop fatigué pour jouer un match.");
-            return;
+    public void augmenterEndurance(int pourcentage) {
+        if (pourcentage < 0 || pourcentage > 100) {
+            throw new IllegalArgumentException("Le pourcentage d'endurance doit être compris entre 0 et 100.");
         }
-        this.endurance = Math.max(this.endurance - 40, 0);
-        this.qualite = Math.min(this.qualite + 5, 100);
+
+        this.endurance += pourcentage;
+
+        if (this.endurance > 100) {
+            this.endurance = 100;
+        }
     }
 
     /**
-     * realiserEntrainement
-     * Diminue l'endurance du joueur de 20% et augmente sa qualité de 7%.
+     * diminuerEndurance
+     * Diminue l'endurance du joueur d'un pourcentage donné.
+     * 
+     * @param pourcentage 
+     * @throws IllegalArgumentException si le pourcentage est inférieur à 0 ou supérieur à 100
      */
-    public void realiserEntrainement() {
-        // Vérification de l'endurance
-        if (this.endurance < 30) {
-            System.out.println("Le joueur est trop fatigué pour s'entraîner.");
-            return;
+    public void diminuerEndurance(int pourcentage) {
+
+        if (pourcentage < 0 || pourcentage > 100) {
+            throw new IllegalArgumentException("Le pourcentage d'endurance doit être compris entre 0 et 100.");
         }
-        this.endurance = Math.max(this.endurance - 20, 0);
-        this.qualite = Math.min(this.qualite + 7, 100);
+
+        this.endurance -= pourcentage;
+
+        if (this.endurance < 0) {
+            this.endurance = 0;
+        }
     }
 
     /**
-     * realiserRepos
-     * Augmente l'endurance du joueur de 30% et diminue sa qualité de 3%.
+     * augmenterQualite
+     * Augmente la qualité du joueur d'un pourcentage donné.
+     * 
+     * @param pourcentage 
+     * @throws IllegalArgumentException si le pourcentage est inférieur à 0 ou supérieur à 100
      */
-    public void realiserRepos() {
-        this.endurance = Math.min(this.endurance + 30, 100);
-        this.qualite = Math.max(this.qualite - 3, 0);
+    public void augmenterQualite(int pourcentage) {
+        if (pourcentage < 0 || pourcentage > 100) {
+            throw new IllegalArgumentException("Le pourcentage de qualité doit être compris entre 0 et 100.");
+        }
+
+        this.qualite += pourcentage;
+
+        if (this.qualite > 100) {
+            this.qualite = 100;
+        }
+    }
+
+    /**
+     * diminuerQualite
+     * Diminue la qualité du joueur d'un pourcentage donné.
+     * 
+     * @param pourcentage 
+     * @throws IllegalArgumentException si le pourcentage est inférieur à 0 ou supérieur à 100
+     */
+    public void diminuerQualite(int pourcentage) {
+        if (pourcentage < 0 || pourcentage > 100) {
+            throw new IllegalArgumentException("Le pourcentage de qualité doit être compris entre 0 et 100.");
+        }
+
+        this.qualite -= pourcentage;
+        
+        if (this.qualite < 0) {
+            this.qualite = 0;
+        }
     }
 
     /**

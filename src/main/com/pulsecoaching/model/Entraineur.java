@@ -9,12 +9,14 @@ import java.time.LocalDate;
  * Représente un entraîneur de football.
  */
 public class Entraineur extends Personne {
-    private String fonction;
+    private String numeroLiscence;
+    private String niveauCertification;
     
     // Constructeur
     public Entraineur(EntraineurBuilder builder) {
         super(builder.nom, builder.prenom, builder.naissance, builder.nationalite);
-        this.fonction = builder.fonction;
+        this.numeroLiscence = builder.numeroLiscence;
+        this.niveauCertification = builder.niveauCertification;
     }
 
     // Constructeur builder
@@ -23,7 +25,8 @@ public class Entraineur extends Personne {
         private String prenom;
         private LocalDate naissance;
         private String nationalite;
-        private String fonction;
+        private String numeroLiscence;
+        private String niveauCertification;
 
         // Nom de l'entraîneur
         public EntraineurBuilder nom(String nom) {
@@ -49,9 +52,15 @@ public class Entraineur extends Personne {
             return this;
         }
 
-        // Spécialité de l'entraîneur
-        public EntraineurBuilder fonction(String fonction) {
-            this.fonction = fonction;
+        // Numéro de licence de l'entraîneur
+        public EntraineurBuilder numeroLiscence(String numeroLiscence) {
+            this.numeroLiscence = numeroLiscence;
+            return this;
+        }
+
+        // Niveau de certification de l'entraîneur
+        public EntraineurBuilder niveauCertification(String niveauCertification) {
+            this.niveauCertification = niveauCertification;
             return this;
         }
 
@@ -77,7 +86,8 @@ public class Entraineur extends Personne {
         sb.append(nom).append(" ").append(prenom)
         .append(", né le ").append(naissance)
         .append(", nationalité ").append(nationalite)
-        .append(", fonction ").append(fonction);
+        .append(", numéro de licence : ").append(numeroLiscence)
+        .append(", niveau de certification : ").append(niveauCertification);
 
         return sb.toString();
     }

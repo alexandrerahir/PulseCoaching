@@ -25,5 +25,16 @@ public class Main {
         Position positionAD = new Position("Ailier droit", "AD");
         Position positionAG = new Position("Ailier gauche", "AG");
 
+        // Création d'un entreineur
+        Entraineur entraineur = new Entraineur.EntraineurBuilder()
+                .nom("Dupont")
+                .prenom("Jean")
+                .naissance(LocalDate.of(1980, 5, 15))
+                .nationalite("Française")
+                .numeroLiscence("123456")
+                .niveauCertification("UEFA Pro")
+                .build();
+
+        System.out.println(entraineur.toString());
     }
 }
