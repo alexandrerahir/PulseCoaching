@@ -20,7 +20,7 @@ public class Joueur extends Personne {
 
     // Constructeur
     private Joueur(JoueurBuilder builder) {
-        super(builder.nom, builder.prenom, builder.naissance, builder.nationalite, builder.equipe);
+        super(builder.nom, builder.prenom, builder.naissance, builder.nationalite);
         this.taille = builder.taille;
         this.poids = builder.poids;
         this.endurance = builder.endurance;
@@ -34,7 +34,6 @@ public class Joueur extends Personne {
         private String prenom;
         private LocalDate naissance;
         private String nationalite;
-        private Equipe equipe;
         private int taille;
         private int poids;
         private int endurance = 100;
@@ -63,12 +62,6 @@ public class Joueur extends Personne {
         // Nationalité du joueur
         public JoueurBuilder nationalite(String nationalite) {
             this.nationalite = nationalite;
-            return this;
-        }
-
-        // Équipe du joueur
-        public JoueurBuilder equipe(Equipe equipe) {
-            this.equipe = equipe;
             return this;
         }
 
@@ -104,12 +97,6 @@ public class Joueur extends Personne {
             }
 
             Joueur joueur = new Joueur(this);
-
-            // Ajouter le joueur à l'équipe si l'équipe n'est pas null
-            if (this.equipe != null) {
-                this.equipe.ajouterJoueur(joueur);
-            }
-
             return joueur;
         }
 
@@ -177,40 +164,6 @@ public class Joueur extends Personne {
         }
 
         return sb.toString().substring(0, sb.length() - 2);
-    }
-
-
-
-    // Getters et Setters
-
-    /**
-     * getEndurance
-     * Retourne l'endurance du joueur.
-     * 
-     * @return l'endurance du joueur
-     */
-    public int getEndurance() {
-        return endurance;
-    }
-
-    /**
-     * getQualite
-     * Retourne la qualité du joueur.
-     * 
-     * @return la qualité du joueur
-     */
-    public int getQualite() {
-        return qualite;
-    }
-
-    /**
-     * getPositions
-     * Retourne les positions du joueur.
-     * 
-     * @return les positions du joueur
-     */
-    public Set<Position> getPositions() {
-        return positions;
     }
 
 }

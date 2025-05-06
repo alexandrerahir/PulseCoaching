@@ -1,15 +1,15 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.2.2 Chrome/134.0.6998.178 Electron/35.1.2 Safari/537.36" version="26.2.2">
   <diagram name="Page-1" id="bPuFZjUi1AL_pEAQR9ox">
-    <mxGraphModel dx="1503" dy="885" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="664" dy="391" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="Eg1cmbTTBJbZFbh08boU-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0;entryDx=0;entryDy=0;endArrow=none;startFill=0;" edge="1" parent="1">
+        <mxCell id="Eg1cmbTTBJbZFbh08boU-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0;entryDx=0;entryDy=0;endArrow=none;startFill=0;exitX=0;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="Eg1cmbTTBJbZFbh08boU-26">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="760" y="491.49" as="sourcePoint" />
-            <mxPoint x="920" y="491.49" as="targetPoint" />
+            <mxPoint x="1080" y="311.49" as="sourcePoint" />
+            <mxPoint x="1240" y="311.49" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="760" y="491.49" />
+              <mxPoint x="1080" y="312" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -19,18 +19,22 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="Eg1cmbTTBJbZFbh08boU-26" value="&lt;font face=&quot;Comic Sans MS&quot; style=&quot;font-size: 6px;&quot;&gt;0..*&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="760" y="474" width="20" height="18" as="geometry" />
+          <mxGeometry x="1060" y="294" width="20" height="18" as="geometry" />
         </mxCell>
         <mxCell id="Eg1cmbTTBJbZFbh08boU-35" value="&lt;font face=&quot;Comic Sans MS&quot; style=&quot;font-size: 6px;&quot;&gt;1..3&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="900" y="474" width="20" height="18" as="geometry" />
+          <mxGeometry x="1220" y="294" width="20" height="18" as="geometry" />
         </mxCell>
         <mxCell id="Eg1cmbTTBJbZFbh08boU-70" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="Eg1cmbTTBJbZFbh08boU-38" target="Eg1cmbTTBJbZFbh08boU-57">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="650" y="320" as="targetPoint" />
+            <mxPoint x="950" y="140" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="960" y="220" />
+              <mxPoint x="820" y="220" />
+            </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="Eg1cmbTTBJbZFbh08boU-38" value="&lt;font style=&quot;&quot; face=&quot;Comic Sans MS&quot;&gt;Joueur&lt;/font&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="560" y="440" width="200" height="216" as="geometry" />
+          <mxGeometry x="860" y="260" width="200" height="216" as="geometry" />
         </mxCell>
         <mxCell id="0TyT_RYLDZ_SMIHeVWue-5" value="&lt;font face=&quot;Comic Sans MS&quot;&gt;- taille : int&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="Eg1cmbTTBJbZFbh08boU-38" vertex="1">
           <mxGeometry y="26" width="200" height="26" as="geometry" />
@@ -57,7 +61,7 @@
           <mxGeometry y="190" width="200" height="26" as="geometry" />
         </mxCell>
         <mxCell id="Eg1cmbTTBJbZFbh08boU-44" value="&lt;font style=&quot;&quot; face=&quot;Comic Sans MS&quot;&gt;Position&lt;/font&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="920" y="440" width="200" height="86" as="geometry" />
+          <mxGeometry x="1240" y="260" width="200" height="86" as="geometry" />
         </mxCell>
         <mxCell id="9" value="&lt;font style=&quot;&quot; face=&quot;Comic Sans MS&quot;&gt;- nom : String&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="Eg1cmbTTBJbZFbh08boU-44" vertex="1">
           <mxGeometry y="26" width="200" height="26" as="geometry" />
@@ -69,7 +73,7 @@
           <mxGeometry y="78" width="200" height="8" as="geometry" />
         </mxCell>
         <mxCell id="Eg1cmbTTBJbZFbh08boU-57" value="&lt;font style=&quot;&quot; face=&quot;Comic Sans MS&quot;&gt;&lt;i&gt;Personne&lt;/i&gt;&lt;/font&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="420" y="220" width="200" height="138" as="geometry" />
+          <mxGeometry x="720" y="40" width="200" height="138" as="geometry" />
         </mxCell>
         <mxCell id="Eg1cmbTTBJbZFbh08boU-58" value="&lt;font style=&quot;&quot; face=&quot;Comic Sans MS&quot;&gt;- nom : String&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="Eg1cmbTTBJbZFbh08boU-57">
           <mxGeometry y="26" width="200" height="26" as="geometry" />
@@ -87,13 +91,15 @@
           <mxGeometry y="130" width="200" height="8" as="geometry" />
         </mxCell>
         <mxCell id="Eg1cmbTTBJbZFbh08boU-81" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="Eg1cmbTTBJbZFbh08boU-71" target="Eg1cmbTTBJbZFbh08boU-57">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="Eg1cmbTTBJbZFbh08boU-98" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;startFill=0;" edge="1" parent="1" source="Eg1cmbTTBJbZFbh08boU-71" target="Eg1cmbTTBJbZFbh08boU-101">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="680" y="220" />
+              <mxPoint x="820" y="220" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="Eg1cmbTTBJbZFbh08boU-71" value="&lt;font style=&quot;&quot; face=&quot;Comic Sans MS&quot;&gt;Entraineur&lt;/font&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="280" y="440" width="200" height="60" as="geometry" />
+          <mxGeometry x="580" y="260" width="200" height="60" as="geometry" />
         </mxCell>
         <mxCell id="Eg1cmbTTBJbZFbh08boU-82" value="&lt;font style=&quot;&quot; face=&quot;Comic Sans MS&quot;&gt;- fonction : String&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="Eg1cmbTTBJbZFbh08boU-71">
           <mxGeometry y="26" width="200" height="26" as="geometry" />
@@ -101,32 +107,8 @@
         <mxCell id="Eg1cmbTTBJbZFbh08boU-76" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="Eg1cmbTTBJbZFbh08boU-71">
           <mxGeometry y="52" width="200" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="Eg1cmbTTBJbZFbh08boU-92" value="&lt;font style=&quot;&quot; face=&quot;Comic Sans MS&quot;&gt;Equipe&lt;/font&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="920" y="810" width="200" height="138" as="geometry" />
-        </mxCell>
-        <mxCell id="Eg1cmbTTBJbZFbh08boU-95" value="&lt;font style=&quot;&quot; face=&quot;Comic Sans MS&quot;&gt;- nom : String&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="Eg1cmbTTBJbZFbh08boU-92">
-          <mxGeometry y="26" width="200" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="Eg1cmbTTBJbZFbh08boU-96" value="&lt;font style=&quot;&quot; face=&quot;Comic Sans MS&quot;&gt;- abreviation : String&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="Eg1cmbTTBJbZFbh08boU-92">
-          <mxGeometry y="52" width="200" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="Eg1cmbTTBJbZFbh08boU-93" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="Eg1cmbTTBJbZFbh08boU-92">
-          <mxGeometry y="78" width="200" height="8" as="geometry" />
-        </mxCell>
-        <mxCell id="Eg1cmbTTBJbZFbh08boU-100" value="&lt;font face=&quot;Comic Sans MS&quot;&gt;+ ajouterJoueur() : void&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="Eg1cmbTTBJbZFbh08boU-92">
-          <mxGeometry y="86" width="200" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="Eg1cmbTTBJbZFbh08boU-101" value="&lt;font face=&quot;Comic Sans MS&quot;&gt;+ supprimerJoueur() : void&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="Eg1cmbTTBJbZFbh08boU-92">
-          <mxGeometry y="112" width="200" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="Eg1cmbTTBJbZFbh08boU-94" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;startFill=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="Eg1cmbTTBJbZFbh08boU-38" target="Eg1cmbTTBJbZFbh08boU-95">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="790" y="710" as="targetPoint" />
-            <mxPoint x="660" y="670" as="sourcePoint" />
-            <Array as="points">
-              <mxPoint x="660" y="849" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="Eg1cmbTTBJbZFbh08boU-105" value="&lt;p style=&quot;box-sizing: border-box; margin: 0in; color: rgb(38, 38, 38);&quot; lang=&quot;fr&quot;&gt;&lt;font face=&quot;Comic Sans MS&quot; style=&quot;font-size: 9px;&quot;&gt;Gérer une équipe de football. Les entraînements, les matchs, les joueurs, les entraîneurs, les blessures, les pénalités (carton jaune, orange, rouge), les présences, les statistiques des matchs, des joueurs, des entraînements, des fautes.&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; color: rgb(38, 38, 38); margin: 0in;&quot; lang=&quot;fr&quot;&gt;&lt;font face=&quot;Comic Sans MS&quot; style=&quot;font-size: 9px;&quot;&gt;&amp;nbsp;&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; color: rgb(38, 38, 38); margin: 0in;&quot; lang=&quot;fr&quot;&gt;&lt;font face=&quot;Comic Sans MS&quot; style=&quot;font-size: 9px;&quot;&gt;En dehors du gardien, chaque joueur est spécialisé pour 1 à 3 positions possibles sur le terrain (on joue en 3-4-3). Il faut savoir créer les équipes en fonction des joueurs disponibles et de leur position.&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; color: rgb(38, 38, 38); margin: 0in;&quot; lang=&quot;fr&quot;&gt;&lt;font face=&quot;Comic Sans MS&quot; style=&quot;font-size: 9px;&quot;&gt;&amp;nbsp;&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; color: rgb(38, 38, 38); margin: 0in;&quot; lang=&quot;fr&quot;&gt;&lt;font face=&quot;Comic Sans MS&quot; style=&quot;font-size: 9px;&quot;&gt;Tenir compte qu&#39;un joueur qui vient à l&#39;entraînement ou joue un match voit sa &quot;qualité de jeu&quot; augmenter mais sa stamina (condition physique) diminuer. Un joueur qui ne joue pas régulièrement ou ne vient pas à l&#39;entraînement voit sa stamina augmenter mais sa qualité diminuer.&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; color: rgb(38, 38, 38); margin: 0in;&quot; lang=&quot;fr&quot;&gt;&lt;font face=&quot;Comic Sans MS&quot; style=&quot;font-size: 9px;&quot;&gt;&amp;nbsp;&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; color: rgb(38, 38, 38); margin: 0in;&quot; lang=&quot;fr&quot;&gt;&lt;font face=&quot;Comic Sans MS&quot; style=&quot;font-size: 9px;&quot;&gt;Les blessures peuvent survenir à l&#39;entraînement ou pendant les matchs. Elles entraînent une diminution de la stamina et de la qualité.&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; color: rgb(38, 38, 38); margin: 0in;&quot; lang=&quot;fr&quot;&gt;&lt;font face=&quot;Comic Sans MS&quot; style=&quot;font-size: 9px;&quot;&gt;&amp;nbsp;&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; color: rgb(38, 38, 38); margin: 0in;&quot; lang=&quot;fr&quot;&gt;&lt;font face=&quot;Comic Sans MS&quot; style=&quot;font-size: 9px;&quot;&gt;Définir un seuil de stamina minimum pour l&#39;entraînement et un pour les matchs.&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; color: rgb(38, 38, 38); margin: 0in;&quot; lang=&quot;fr&quot;&gt;&lt;font face=&quot;Comic Sans MS&quot; style=&quot;font-size: 9px;&quot;&gt;&amp;nbsp;&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; color: rgb(38, 38, 38); margin: 0in;&quot; lang=&quot;fr&quot;&gt;&lt;font face=&quot;Comic Sans MS&quot; style=&quot;font-size: 9px;&quot;&gt;Définir des priorités de sélection en fonction de la qualité des joueurs, des spécialisations et de leur stamina.&lt;/font&gt;&lt;/p&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;fillColor=#fff2cc;strokeColor=#d6b656;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="480" height="280" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
