@@ -14,7 +14,7 @@ public class Entraineur extends Personne {
     
     // Constructeur
     public Entraineur(EntraineurBuilder builder) {
-        super(builder.nom, builder.prenom, builder.naissance, builder.nationalite);
+        super(builder.nom, builder.prenom, builder.naissance, builder.nationalite, builder.equipe);
         this.numeroLiscence = builder.numeroLiscence;
         this.niveauCertification = builder.niveauCertification;
     }
@@ -27,6 +27,8 @@ public class Entraineur extends Personne {
         private String nationalite;
         private String numeroLiscence;
         private String niveauCertification;
+
+        private Equipe equipe;
 
         // Nom de l'entraîneur
         public EntraineurBuilder nom(String nom) {
@@ -61,6 +63,12 @@ public class Entraineur extends Personne {
         // Niveau de certification de l'entraîneur
         public EntraineurBuilder niveauCertification(String niveauCertification) {
             this.niveauCertification = niveauCertification;
+            return this;
+        }
+
+        // Équipe de l'entraîneur
+        public EntraineurBuilder equipe(Equipe equipe) {
+            this.equipe = equipe;
             return this;
         }
 

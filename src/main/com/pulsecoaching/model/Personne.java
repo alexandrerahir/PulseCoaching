@@ -14,11 +14,35 @@ public abstract class Personne {
     protected LocalDate naissance;
     protected String nationalite;
 
+    protected Equipe equipe;
+
     // Constructeur
-    public Personne(String nom, String prenom, LocalDate naissance, String nationalite) {
+    public Personne(String nom, String prenom, LocalDate naissance, String nationalite, Equipe equipe) {
         this.nom = nom;
         this.prenom = prenom;
         this.naissance = naissance;
         this.nationalite = nationalite;
+        this.equipe = equipe;
     }
+
+
+
+    // Getters et Setters
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public Equipe getEquipe() {
+        return equipe;
+    }
+
+    public void setEquipe(Equipe equipe) {
+        this.equipe = equipe;
+    }
+
 }

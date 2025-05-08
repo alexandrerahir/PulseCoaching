@@ -20,7 +20,7 @@ public class Joueur extends Personne {
 
     // Constructeur
     private Joueur(JoueurBuilder builder) {
-        super(builder.nom, builder.prenom, builder.naissance, builder.nationalite);
+        super(builder.nom, builder.prenom, builder.naissance, builder.nationalite, builder.equipe);
         this.taille = builder.taille;
         this.poids = builder.poids;
         this.endurance = builder.endurance;
@@ -39,6 +39,7 @@ public class Joueur extends Personne {
         private int endurance = 100;
         private int qualite = 0;
 
+        private Equipe equipe;
         private Set<Position> positions = new LinkedHashSet<>();
 
         // Nom du joueur
@@ -77,26 +78,30 @@ public class Joueur extends Personne {
             return this;
         }
 
-        // Positions du joueur
-        public JoueurBuilder ajouterPosition(Position position) {
-            // Vérification du nombre de positions
-            if (this.positions.size() >= 3) {
-                throw new IllegalArgumentException("Un joueur ne peut avoir que 3 positions maximum.");
-            }
+        // Equipe du joueur
+        public JoueurBuilder equipe(Equipe equipe) {
+            this.equipe = equipe;
+            return this;
+        }
 
-            // Rajout de la position
-            this.positions.add(position);
+        // Positions du joueur
+        public JoueurBuilder positions(Position... position) {
+            if (position.length > 3) {
+                throw new IllegalArgumentException("Un joueur ne peut pas avoir plus de 3 positions.");
+            }
+            this.positions = new LinkedHashSet<>(Set.of(position));
             return this;
         }
 
         // Construction du joueur
         public Joueur build() {
+            Joueur joueur = new Joueur(this);
+
             // Véfication si le joueur a au moins une position
             if (positions.isEmpty()) {
                 throw new IllegalStateException("Un joueur doit avoir au moins une position.");
             }
 
-            Joueur joueur = new Joueur(this);
             return joueur;
         }
 
@@ -111,6 +116,7 @@ public class Joueur extends Personne {
      * Augmente l'endurance du joueur d'un pourcentage donné.
      * 
      * @param pourcentage 
+     * 
      * @throws IllegalArgumentException si le pourcentage est inférieur à 0 ou supérieur à 100
      */
     public void augmenterEndurance(int pourcentage) {
@@ -130,6 +136,7 @@ public class Joueur extends Personne {
      * Diminue l'endurance du joueur d'un pourcentage donné.
      * 
      * @param pourcentage 
+     * 
      * @throws IllegalArgumentException si le pourcentage est inférieur à 0 ou supérieur à 100
      */
     public void diminuerEndurance(int pourcentage) {
@@ -150,6 +157,7 @@ public class Joueur extends Personne {
      * Augmente la qualité du joueur d'un pourcentage donné.
      * 
      * @param pourcentage 
+     * 
      * @throws IllegalArgumentException si le pourcentage est inférieur à 0 ou supérieur à 100
      */
     public void augmenterQualite(int pourcentage) {
@@ -169,6 +177,7 @@ public class Joueur extends Personne {
      * Diminue la qualité du joueur d'un pourcentage donné.
      * 
      * @param pourcentage 
+     * 
      * @throws IllegalArgumentException si le pourcentage est inférieur à 0 ou supérieur à 100
      */
     public void diminuerQualite(int pourcentage) {
@@ -177,10 +186,42 @@ public class Joueur extends Personne {
         }
 
         this.qualite -= pourcentage;
-        
+
         if (this.qualite < 0) {
             this.qualite = 0;
         }
+    }
+
+    /**
+     * ajouterPosition
+     * Ajoute une position au joueur.
+     * 
+     * @param position
+     * 
+     * @throws IllegalStateException si le joueur a déjà 3 positions
+     */
+    public void ajouterPosition(Position position) {
+        // Vérification si le joueur a déjà 3 positions
+        if (positions.size() >= 3) {
+            throw new IllegalStateException("Un joueur ne peut pas avoir plus de 3 positions.");
+        }
+        positions.add(position);
+    }
+
+    /**
+     * retirerPosition
+     * Retire une position du joueur.
+     * 
+     * @param position
+     * 
+     * @throws IllegalStateException si le joueur n'a pas au moins une position restante
+     */    
+    public void retirerPosition(Position position) {
+        // Vérification si le joueur a au moins une position restante
+        if (positions.size() <= 1) {
+            throw new IllegalStateException("Un joueur doit avoir au moins une position.");
+        }
+        positions.remove(position);
     }
 
     /**
