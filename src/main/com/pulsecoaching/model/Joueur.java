@@ -2,6 +2,7 @@
 package com.pulsecoaching.model;
 
 // Importation
+import com.pulsecoaching.exception.Joueur.*;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -86,9 +87,11 @@ public class Joueur extends Personne {
 
         // Positions du joueur
         public JoueurBuilder positions(Position... position) {
+            // Vérification si le joueur dépasse 3 positions
             if (position.length > 3) {
-                throw new IllegalArgumentException("Un joueur ne peut pas avoir plus de 3 positions.");
+                throw new JoueurTropDePositionsException(nom + " " + prenom);
             }
+
             this.positions = new LinkedHashSet<>(Set.of(position));
             return this;
         }
@@ -99,7 +102,7 @@ public class Joueur extends Personne {
 
             // Véfication si le joueur a au moins une position
             if (positions.isEmpty()) {
-                throw new IllegalStateException("Un joueur doit avoir au moins une position.");
+                throw new JoueurSansPositionException(nom + " " + prenom);
             }
 
             return joueur;
@@ -120,12 +123,14 @@ public class Joueur extends Personne {
      * @throws IllegalArgumentException si le pourcentage est inférieur à 0 ou supérieur à 100
      */
     public void augmenterEndurance(int pourcentage) {
+        // Verification si le pourcentage est compris entre 0 et 100
         if (pourcentage < 0 || pourcentage > 100) {
-            throw new IllegalArgumentException("Le pourcentage d'endurance doit être compris entre 0 et 100.");
+            throw new PourcentageInvalideException(pourcentage);
         }
 
         this.endurance += pourcentage;
 
+        // Vérification si l'endurance dépasse 100%
         if (this.endurance > 100) {
             this.endurance = 100;
         }
@@ -140,13 +145,14 @@ public class Joueur extends Personne {
      * @throws IllegalArgumentException si le pourcentage est inférieur à 0 ou supérieur à 100
      */
     public void diminuerEndurance(int pourcentage) {
-
+        // Verification si le pourcentage est compris entre 0 et 100
         if (pourcentage < 0 || pourcentage > 100) {
-            throw new IllegalArgumentException("Le pourcentage d'endurance doit être compris entre 0 et 100.");
+            throw new PourcentageInvalideException(pourcentage);
         }
 
         this.endurance -= pourcentage;
 
+        // Vérification si l'endurance est inférieure à 0%
         if (this.endurance < 0) {
             this.endurance = 0;
         }
@@ -161,12 +167,14 @@ public class Joueur extends Personne {
      * @throws IllegalArgumentException si le pourcentage est inférieur à 0 ou supérieur à 100
      */
     public void augmenterQualite(int pourcentage) {
+        // Verification si le pourcentage est compris entre 0 et 100
         if (pourcentage < 0 || pourcentage > 100) {
-            throw new IllegalArgumentException("Le pourcentage de qualité doit être compris entre 0 et 100.");
+            throw new PourcentageInvalideException(pourcentage);
         }
 
         this.qualite += pourcentage;
 
+        // Vérification si la qualité dépasse 100%
         if (this.qualite > 100) {
             this.qualite = 100;
         }
@@ -181,12 +189,14 @@ public class Joueur extends Personne {
      * @throws IllegalArgumentException si le pourcentage est inférieur à 0 ou supérieur à 100
      */
     public void diminuerQualite(int pourcentage) {
+        // Verification si le pourcentage est compris entre 0 et 100
         if (pourcentage < 0 || pourcentage > 100) {
-            throw new IllegalArgumentException("Le pourcentage de qualité doit être compris entre 0 et 100.");
+            throw new PourcentageInvalideException(pourcentage);
         }
 
         this.qualite -= pourcentage;
 
+        // Vérification si la qualité est inférieure à 0%
         if (this.qualite < 0) {
             this.qualite = 0;
         }
@@ -203,8 +213,9 @@ public class Joueur extends Personne {
     public void ajouterPosition(Position position) {
         // Vérification si le joueur a déjà 3 positions
         if (positions.size() >= 3) {
-            throw new IllegalStateException("Un joueur ne peut pas avoir plus de 3 positions.");
+            throw new JoueurTropDePositionsException(nom + " " + prenom);
         }
+
         positions.add(position);
     }
 
@@ -219,8 +230,9 @@ public class Joueur extends Personne {
     public void retirerPosition(Position position) {
         // Vérification si le joueur a au moins une position restante
         if (positions.size() <= 1) {
-            throw new IllegalStateException("Un joueur doit avoir au moins une position.");
+            throw new JoueurSansPositionException(nom + " " + prenom);
         }
+
         positions.remove(position);
     }
 

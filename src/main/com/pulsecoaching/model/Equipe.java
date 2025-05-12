@@ -1,10 +1,8 @@
 // Package
 package com.pulsecoaching.model;
 
-import java.util.HashSet;
 // Importation
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 /**

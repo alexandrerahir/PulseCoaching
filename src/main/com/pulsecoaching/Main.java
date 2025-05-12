@@ -25,24 +25,24 @@ public class Main {
         Position positionAD = new Position("Ailier droit", "AD");
         Position positionAG = new Position("Ailier gauche", "AG");
 
-        // Création de l'entraîneur
-        Entraineur entraineur = new Entraineur.EntraineurBuilder()
-            .nom("Dupont")
-            .prenom("Jean")
-            .naissance(LocalDate.of(1980, 5, 15))
-            .nationalite("Française")
-            .numeroLiscence("123456")
-            .niveauCertification("UEFA Pro")
-            .build();
+        // // Création de l'entraîneur
+        // Entraineur entraineur = new Entraineur.EntraineurBuilder()
+        //     .nom("Dupont")
+        //     .prenom("Jean")
+        //     .naissance(LocalDate.of(1980, 5, 15))
+        //     .nationalite("Française")
+        //     .numeroLiscence("123456")
+        //     .niveauCertification("UEFA Pro")
+        //     .build();
 
-        Entraineur entraineur2 = new Entraineur.EntraineurBuilder()
-            .nom("Leroy")
-            .prenom("Marc")
-            .naissance(LocalDate.of(1985, 8, 25))
-            .nationalite("Française")
-            .numeroLiscence("654321")
-            .niveauCertification("UEFA A")
-            .build();
+        // Entraineur entraineur2 = new Entraineur.EntraineurBuilder()
+        //     .nom("Leroy")
+        //     .prenom("Marc")
+        //     .naissance(LocalDate.of(1985, 8, 25))
+        //     .nationalite("Française")
+        //     .numeroLiscence("654321")
+        //     .niveauCertification("UEFA A")
+        //     .build();
             
         // Création des joueurs
         Joueur joueur1 = new Joueur.JoueurBuilder()
@@ -52,7 +52,6 @@ public class Main {
             .nationalite("Française")
             .taille(180)
             .poids(75)
-            .positions(positionGB)
             .build();
 
         Joueur joueur2 = new Joueur.JoueurBuilder()
@@ -62,24 +61,24 @@ public class Main {
             .nationalite("Française")
             .taille(185)
             .poids(80)
-            .positions(positionDC, positionDD)
+            .positions(positionDC, positionDD, positionMDC, positionMC)
             .build();
 
         
-        // Création d'une autre équipe
-        Equipe fcmotro = new Equipe.EquipeBuilder()
-            .nom("FC Motro")
-            .build();
+        // // Création d'une autre équipe
+        // Equipe fcmotro = new Equipe.EquipeBuilder()
+        //     .nom("FC Motro")
+        //     .build();
 
-        Equipe fcpoli = new Equipe.EquipeBuilder()
-            .nom("FC Poli")
-            .joueurs(joueur2)
-            .build();
+        // Equipe fcpoli = new Equipe.EquipeBuilder()
+        //     .nom("FC Poli")
+        //     .joueurs(joueur2)
+        //     .build();
 
-        fcpoli.ajouterEntraineur(entraineur);
+        // fcpoli.ajouterEntraineur(entraineur);
 
-        fcpoli.retirerEntraineur(entraineur);
+        // fcpoli.retirerEntraineur(entraineur);
 
-        System.out.println(entraineur.getEquipe().getNom());
+        // System.out.println(entraineur.getEquipe().getNom());
     }
 }
