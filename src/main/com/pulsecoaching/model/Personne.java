@@ -37,6 +37,10 @@ public abstract class Personne {
         return prenom;
     }
 
+    public String getNomPrenom() {
+        return nom + " " + prenom;
+    }
+
     public Equipe getEquipe() {
         return equipe;
     }

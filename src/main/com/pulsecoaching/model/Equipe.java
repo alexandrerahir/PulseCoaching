@@ -2,6 +2,7 @@
 package com.pulsecoaching.model;
 
 // Importation
+import com.pulsecoaching.exception.Equipe.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -39,7 +40,7 @@ public class Equipe {
         public EquipeBuilder entraineur(Entraineur entraineur) {
             // Vérification si l'entraîneur n'appartient pas déjà à une autre équipe
             if (entraineur.getEquipe() != null) {
-                throw new IllegalArgumentException("L'entraîneur " + entraineur.getNom() + " appartient déjà à une autre équipe.");
+                throw new EntraineurDejaDansUneEquipeException(entraineur.getNomPrenom());
             }
 
             this.entraineur = entraineur;
@@ -51,7 +52,7 @@ public class Equipe {
             for (Joueur joueur : joueurs) {
                 // Vérification si le joueur n'appartient pas déjà à une autre équipe
                 if (joueur.getEquipe() != null) {
-                    throw new IllegalArgumentException("Le joueur " + joueur.getNom() + " appartient déjà à une autre équipe.");
+                    throw new JoueurDejaDansUneEquipeException(joueur.getNomPrenom());
                 }
 
                 this.joueurs.add(joueur);
@@ -86,12 +87,13 @@ public class Equipe {
      * Ajoute un joueur à l'équipe.
      * 
      * @param joueur Le joueur à ajouter
+     * 
      * @throws IllegalArgumentException Si le joueur appartient déjà à une autre équipe
      */
     public void ajouterJoueur(Joueur joueur) {
         // Vérification si le joueur n'appartient pas déjà à une autre équipe
         if (joueur.getEquipe() != null) {
-            throw new IllegalArgumentException("Le joueur " + joueur.getNom() + " appartient déjà à une autre équipe.");
+            throw new JoueurDejaDansUneEquipeException(joueur.getNomPrenom());
         }
 
         // Assigner l'équipe au joueur
@@ -104,11 +106,13 @@ public class Equipe {
      * Retire un joueur de l'équipe.
      * 
      * @param joueur Le joueur à retirer
+     * 
+     * @throws IllegalArgumentException Si le joueur n'est pas dans l'équipe
      */
     public void retirerJoueur(Joueur joueur) {
         // Vérification si le joueur est dans l'équipe
         if (!joueurs.contains(joueur)) {
-            throw new IllegalArgumentException("Le joueur " + joueur.getNom() + " n'est pas dans l'équipe.");
+            throw new JoueurNonPresentDansEquipeException(joueur.getNomPrenom());
         }
 
         // Désassigner l'équipe du joueur
@@ -122,24 +126,18 @@ public class Equipe {
      * 
      * @param entraineur L'entraîneur à ajouter
      * 
-     * @throws IllegalArgumentException Si l'entraîneur est déjà dans l'équipe
      * @throws IllegalStateException Si l'équipe a déjà un entraîneur
      * @throws IllegalArgumentException Si l'entraîneur appartient déjà à une autre équipe
      */
     public void ajouterEntraineur(Entraineur entraineur) {
-        // Vérification si l'entraîneur est déjà dans l'équipe
-        if (this.entraineur == entraineur) {
-            throw new IllegalArgumentException("L'entraîneur " + entraineur.getNom() + " est déjà dans l'équipe.");
-        }
-
         // Vérification si l'équipe a déjà un entraîneur
         if (this.entraineur != null) {
-            throw new IllegalStateException("L'équipe a déjà un entraîneur.");
+            throw new EquipeDejaAUnEntraineurException(this.nom);
         }
 
         // Vérification si l'entraîneur n'appartient pas déjà à une autre équipe
         if (entraineur.getEquipe() != null) {
-            throw new IllegalArgumentException("L'entraîneur " + entraineur.getNom() + " appartient déjà à une autre équipe.");
+            throw new EntraineurDejaDansUneEquipeException(entraineur.getNomPrenom());
         }
 
         // Assigner l'entraîneur à l'équipe
@@ -158,7 +156,7 @@ public class Equipe {
     public void retirerEntraineur(Entraineur entraineur) {
         // Vérification si l'entraîneur est dans l'équipe
         if (this.entraineur != entraineur) {
-            throw new IllegalArgumentException("L'entraîneur " + entraineur.getNom() + " n'est pas dans l'équipe.");
+            throw new EntraineurNonPresentDansEquipeException(entraineur.getNomPrenom());
         }
 
         // Désassigner l'entraîneur de l'équipe
