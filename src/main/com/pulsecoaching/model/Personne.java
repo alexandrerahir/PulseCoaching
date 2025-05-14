@@ -41,6 +41,14 @@ public abstract class Personne {
         return nom + " " + prenom;
     }
 
+    public LocalDate getNaissance() {
+        return naissance;
+    }
+
+    public String getNationalite() {
+        return nationalite;
+    }
+
     public Equipe getEquipe() {
         return equipe;
     }

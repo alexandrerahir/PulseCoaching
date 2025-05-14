@@ -259,4 +259,36 @@ public class Joueur extends Personne {
         return sb.toString().substring(0, sb.length() - 2);
     }
 
+
+
+    // Getters et Setters
+
+    public int getTaille() {
+        return taille;
+    }
+
+    public int getPoids() {
+        return poids;
+    }
+
+    public int getEndurance() {
+        return endurance;
+    }
+
+    public void setEndurance(int endurance) {
+        this.endurance = endurance;
+    }
+
+    public int getQualite() {
+        return qualite;
+    }
+
+    public void setQualite(int qualite) {
+        this.qualite = qualite;
+    }
+
+    public Set<Position> getPositions() {
+        return positions;
+    }
+
 }
