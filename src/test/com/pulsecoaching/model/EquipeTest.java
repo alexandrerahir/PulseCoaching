@@ -3,8 +3,6 @@ package com.pulsecoaching.model;
 
 // Importation
 import com.pulsecoaching.exception.Equipe.*;
-import com.pulsecoaching.exception.Joueur.PourcentageInvalideException;
-
 import org.junit.Test;
 import org.junit.Before;
 import static org.junit.Assert.*;
@@ -18,7 +16,6 @@ public class EquipeTest {
     private Equipe equipe1;
     private Equipe equipe2;
     private Joueur joueur1;
-    private Joueur joueur2;
     private Entraineur entraineur1;
     private Entraineur entraineur2;
 
@@ -49,16 +46,6 @@ public class EquipeTest {
                 .positions(Position.BU)
                 .build();
         
-        joueur2 = new Joueur.JoueurBuilder()
-                .nom("Payet")
-                .prenom("Dimitri")
-                .naissance(LocalDate.of(1987, 3, 29))
-                .nationalite("Française")
-                .taille(175)
-                .poids(70)
-                .positions(Position.MC)
-                .build();
-        
         // Création des entraîneurs
         entraineur1 = new Entraineur.EntraineurBuilder()
                 .nom("Galtier")
@@ -75,6 +62,9 @@ public class EquipeTest {
                 .build();
     }
 
+
+
+    // Tests pour les méthodes de la classe Equipe
 
     /**
      * testAjouterJoueur

@@ -4,6 +4,7 @@ package com.pulsecoaching.model;
 // Importation
 import com.pulsecoaching.exception.Joueur.*;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -90,6 +91,11 @@ public class Joueur extends Personne {
             // Vérification si le joueur dépasse 3 positions
             if (position.length > 3) {
                 throw new JoueurTropDePositionsException(nom + " " + prenom);
+            }
+
+            // Vérification si le joueur a déjà la position de gardien de but
+            if (Arrays.asList(position).contains(Position.GB) && position.length > 1) {
+                throw new JoueurGardienAvecAutresPositionsException(nom + " " + prenom);
             }
 
             this.positions = new LinkedHashSet<>(Set.of(position));
@@ -214,6 +220,11 @@ public class Joueur extends Personne {
         // Vérification si le joueur a déjà 3 positions
         if (positions.size() >= 3) {
             throw new JoueurTropDePositionsException(nom + " " + prenom);
+        }
+
+        // Vérification si le joueur a déjà la position de gardien de but
+        if(positions.contains(Position.GB) || position == Position.GB) {
+            throw new JoueurGardienAvecAutresPositionsException(nom + " " + prenom);
         }
 
         positions.add(position);
