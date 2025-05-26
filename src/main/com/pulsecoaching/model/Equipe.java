@@ -3,8 +3,11 @@ package com.pulsecoaching.model;
 
 // Importation
 import com.pulsecoaching.exception.Equipe.*;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
+import java.time.LocalDate;
 
 /**
  * Classe Equipe
@@ -15,6 +18,7 @@ public class Equipe {
 
     private Entraineur entraineur;
     private Set<Joueur> joueurs;
+    private List<Entrainement> historiquesEntrainements = new ArrayList<>();
 
     // Constructeur
     public Equipe(EquipeBuilder builder) {
@@ -78,6 +82,7 @@ public class Equipe {
             return equipe;
         }
     }
+
 
 
     // Méthodes de la classe Equipe
@@ -165,6 +170,52 @@ public class Equipe {
     }
 
     /**
+     * realiserEntrainement
+     * Réalise un entraînement pour l'équipe.
+     * 
+     * @throws EquipeSansEntraineurException Si l'équipe n'a pas d'entraîneur
+     * @throws EquipeSansJoueurException Si l'équipe n'a pas de joueurs
+     * 
+     * @return Un objet Entrainement représentant l'entraînement réalisé
+     */
+    public Entrainement realiserEntrainement() {
+        // Vérification si l'équipe a un entraîneur
+        if (this.entraineur == null) {
+            throw new EquipeSansEntraineurException(nom);
+        }
+
+        // Vérification si l'équipe a des joueurs
+        if (this.joueurs.isEmpty()) {
+            throw new EquipeSansJoueurException(nom);
+        }
+
+        // Initialisation des ensembles de joueurs présents et absents
+        Set<Joueur> joueursPresent = new LinkedHashSet<>();
+        Set<Joueur> joueursAbsent = new LinkedHashSet<>();
+
+        // Parcours des joueurs pour déterminer qui est présent et qui est absent
+        for (Joueur joueur : joueurs) {
+            if(joueur.getEndurance() > 30) {
+                joueursPresent.add(joueur);
+                joueur.diminuerEndurance(10);
+                joueur.augmenterQualite(20);
+            } else {
+                joueursAbsent.add(joueur);
+                joueur.augmenterEndurance(10);
+                joueur.diminuerQualite(5);
+            }
+        }
+
+        // Création de l'entraînement
+        Entrainement entrainement = Entrainement.nouvelleSeance(LocalDate.now(), joueursPresent, joueursAbsent, this);
+
+        // Ajouter l'entraînement à l'historique des entraînements de l'équipe
+        historiquesEntrainements.add(entrainement);
+
+        return entrainement;
+    }
+
+    /**
      * toString
      * Représente l'équipe sous forme de chaîne de caractères.
      * 
@@ -206,6 +257,10 @@ public class Equipe {
 
     public Entraineur getEntraineur() {
         return entraineur;
-    }   
+    } 
+
+    public List<Entrainement> getHistoriquesEntrainements() {
+        return historiquesEntrainements;
+    }
 
 }

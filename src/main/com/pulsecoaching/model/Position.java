@@ -25,6 +25,8 @@ public enum Position {
         this.abreviation = abreviation;
     }
 
+
+    
     // Methodes de l'énumération
 
     /**

@@ -80,6 +80,7 @@ public class Entraineur extends Personne {
 
     }
 
+    
 
     // Methodes de la classe Entraineur
 
