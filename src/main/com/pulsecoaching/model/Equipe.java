@@ -200,4 +200,12 @@ public class Equipe {
         return nom;
     }
 
+    public Set<Joueur> getJoueurs() {
+        return joueurs;
+    }
+
+    public Entraineur getEntraineur() {
+        return entraineur;
+    }   
+
 }
