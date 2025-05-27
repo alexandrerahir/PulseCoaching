@@ -215,6 +215,7 @@ public class Joueur extends Personne {
      * @param position
      * 
      * @throws IllegalStateException si le joueur a déjà 3 positions
+     * @throws IllegalStateException si le joueur a déjà la position de gardien de but
      */
     public void ajouterPosition(Position position) {
         // Vérification si le joueur a déjà 3 positions

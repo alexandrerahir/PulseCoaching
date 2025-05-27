@@ -100,4 +100,17 @@ public class Entraineur extends Personne {
 
         return sb.toString();
     }
+
+
+
+    // Getters et Setters
+
+    public String getNumeroLiscence() {
+        return numeroLiscence;
+    }
+
+    public String getNiveauCertification() {
+        return niveauCertification;
+    }
+
 }

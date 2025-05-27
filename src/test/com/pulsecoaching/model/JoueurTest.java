@@ -1,7 +1,6 @@
 // Package
 package com.pulsecoaching.model;
 
-import com.pulsecoaching.exception.Equipe.JoueurDejaDansUneEquipeException;
 // Importation
 import com.pulsecoaching.exception.Joueur.*;
 import org.junit.Test;

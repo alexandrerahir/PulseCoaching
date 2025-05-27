@@ -70,4 +70,25 @@ public class Entrainement {
         }
         return sb.toString();
     }
+
+
+
+    // Getters et Setters
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public Set<Joueur> getPresents() {
+        return presents;
+    }
+
+    public Set<Joueur> getAbsents() {
+        return absents;
+    }
+
+    public Equipe getEquipe() {
+        return equipe;
+    }
+    
 }
