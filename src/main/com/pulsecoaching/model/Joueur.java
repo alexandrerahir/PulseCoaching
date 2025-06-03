@@ -20,7 +20,12 @@ public class Joueur extends Personne {
 
     private Set<Position> positions;
 
-    // Constructeur
+    /**
+     * Constructeur
+     * Initialise un joueur avec son nom, prénom, date de naissance, nationalité, taille, poids, endurance, qualité, équipe et positions.
+     * 
+     * @param builder
+     */
     private Joueur(JoueurBuilder builder) {
         super(builder.nom, builder.prenom, builder.naissance, builder.nationalite, builder.equipe);
         this.taille = builder.taille;

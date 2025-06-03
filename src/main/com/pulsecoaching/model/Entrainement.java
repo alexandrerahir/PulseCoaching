@@ -1,6 +1,7 @@
 // Package
 package com.pulsecoaching.model;
 
+// Importation
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -14,7 +15,15 @@ public class Entrainement {
     private Set<Joueur> absents;
     private Equipe equipe;
 
-    // Constructeur
+    /**
+     * Constructeur privé
+     * Initialise un entraînement avec la date, les joueurs présents, les joueurs absents et l'équipe.
+     * 
+     * @param date la date de l'entraînement
+     * @param presents les joueurs présents à l'entraînement
+     * @param absents les joueurs absents à l'entraînement
+     * @param equipe l'équipe associée à l'entraînement
+     */
     private Entrainement(LocalDate date, Set<Joueur> presents, Set<Joueur> absents, Equipe equipe) {
         this.date = date;
         this.presents = presents;

@@ -20,7 +20,12 @@ public class Equipe {
     private Set<Joueur> joueurs;
     private List<Entrainement> historiquesEntrainements = new ArrayList<>();
 
-    // Constructeur
+    /**
+     * Constructeur
+     * Initialise une équipe avec son nom, ses joueurs et son entraîneur.
+     * 
+     * @param builder
+     */
     public Equipe(EquipeBuilder builder) {
         this.nom = builder.nom;
         this.joueurs = builder.joueurs;
@@ -93,7 +98,7 @@ public class Equipe {
      * 
      * @param joueur Le joueur à ajouter
      * 
-     * @throws IllegalArgumentException Si le joueur appartient déjà à une autre équipe
+     * @throws JoueurDejaDansUneEquipeException Si le joueur appartient déjà à une autre équipe
      */
     public void ajouterJoueur(Joueur joueur) {
         // Vérification si le joueur n'appartient pas déjà à une autre équipe
@@ -112,7 +117,7 @@ public class Equipe {
      * 
      * @param joueur Le joueur à retirer
      * 
-     * @throws IllegalArgumentException Si le joueur n'est pas dans l'équipe
+     * @throws JoueurNonPresentDansEquipeException Si le joueur n'est pas dans l'équipe
      */
     public void retirerJoueur(Joueur joueur) {
         // Vérification si le joueur est dans l'équipe
@@ -131,8 +136,8 @@ public class Equipe {
      * 
      * @param entraineur L'entraîneur à ajouter
      * 
-     * @throws IllegalStateException Si l'équipe a déjà un entraîneur
-     * @throws IllegalArgumentException Si l'entraîneur appartient déjà à une autre équipe
+     * @throws EquipeDejaAUnEntraineurException Si l'équipe a déjà un entraîneur
+     * @throws EntraineurDejaDansUneEquipeException Si l'entraîneur appartient déjà à une autre équipe
      */
     public void ajouterEntraineur(Entraineur entraineur) {
         // Vérification si l'équipe a déjà un entraîneur
@@ -156,7 +161,7 @@ public class Equipe {
      * 
      * @param entraineur L'entraîneur à retirer
      * 
-     * @throws IllegalArgumentException Si l'entraîneur n'est pas dans l'équipe
+     * @throws EntraineurNonPresentDansEquipeException Si l'entraîneur n'est pas dans l'équipe
      */
     public void retirerEntraineur(Entraineur entraineur) {
         // Vérification si l'entraîneur est dans l'équipe

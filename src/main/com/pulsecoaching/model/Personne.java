@@ -16,7 +16,16 @@ public abstract class Personne {
 
     protected Equipe equipe;
 
-    // Constructeur
+    /**
+     * Constructeur
+     * Initialise une personne avec son nom, prénom, date de naissance, nationalité et équipe.
+     * 
+     * @param nom
+     * @param prenom
+     * @param naissance
+     * @param nationalite
+     * @param equipe
+     */
     public Personne(String nom, String prenom, LocalDate naissance, String nationalite, Equipe equipe) {
         this.nom = nom;
         this.prenom = prenom;

@@ -12,7 +12,12 @@ public class Entraineur extends Personne {
     private String numeroLiscence;
     private String niveauCertification;
     
-    // Constructeur
+    /**
+     * Constructeur
+     * Initialise un entraîneur avec son nom, prénom, date de naissance, nationalité, numéro de licence et niveau de certification.
+     * 
+     * @param builder
+     */
     public Entraineur(EntraineurBuilder builder) {
         super(builder.nom, builder.prenom, builder.naissance, builder.nationalite, builder.equipe);
         this.numeroLiscence = builder.numeroLiscence;

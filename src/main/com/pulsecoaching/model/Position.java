@@ -19,7 +19,13 @@ public enum Position {
     private String nom;
     private String abreviation;
 
-    // Constructeur
+    /**
+     * Constructeur
+     * Initialise une position avec son nom et son abréviation.
+     * 
+     * @param nom le nom de la position
+     * @param abreviation l'abréviation de la position
+     */	
     Position(String nom, String abreviation) {
         this.nom = nom;
         this.abreviation = abreviation;
