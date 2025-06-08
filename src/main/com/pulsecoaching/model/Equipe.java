@@ -4,6 +4,7 @@ package com.pulsecoaching.model;
 // Importation
 import com.pulsecoaching.exception.Equipe.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,11 +15,15 @@ import java.time.LocalDate;
  * Représente une équipe de football.
  */
 public class Equipe {
+    private static final int STAMINA_MINIMUM_MATCH = 30;
+    private static final int STAMINA_MINIMUM_ENTRAINEMENT = 10;
+
     private String nom;
 
     private Entraineur entraineur;
     private Set<Joueur> joueurs;
     private List<Entrainement> historiquesEntrainements = new ArrayList<>();
+    private List<Match> historiquesMatchs = new ArrayList<>();
 
     /**
      * Constructeur
@@ -32,7 +37,15 @@ public class Equipe {
         this.entraineur = builder.entraineur;
     }
 
-    // Constructeur builder
+    /**
+     * EquipeBuilder
+     * Représente le constructeur de l'équipe.
+     * 
+     * @throws EntraineurDejaDansUneEquipeException Si l'entraîneur appartient déjà à une autre équipe
+     * @throws JoueurDejaDansUneEquipeException Si un joueur appartient déjà à une autre équipe
+     *  
+     * @return Une instance de Equipe
+     */
     public static class EquipeBuilder {
         private String nom;
 
@@ -197,14 +210,31 @@ public class Equipe {
         // Initialisation des ensembles de joueurs présents et absents
         Set<Joueur> joueursPresent = new LinkedHashSet<>();
         Set<Joueur> joueursAbsent = new LinkedHashSet<>();
-
+        Set<Joueur> joueursBlesses = new LinkedHashSet<>();
+        
         // Parcours des joueurs pour déterminer qui est présent et qui est absent
         for (Joueur joueur : joueurs) {
-            if(joueur.getEndurance() > 30) {
-                joueursPresent.add(joueur);
-                joueur.diminuerEndurance(10);
-                joueur.augmenterQualite(20);
-            } else {
+
+            if (joueur.getBlessure() != null && joueur.getBlessure().estActive()) { // Vérification si le jouer est blessé
+                joueursAbsent.add(joueur);
+                joueur.augmenterEndurance(10);
+                joueur.diminuerQualite(5);
+
+            } else if (joueur.getEndurance() > STAMINA_MINIMUM_ENTRAINEMENT) { // Vérification de l'endurance du joueur
+
+                if (Math.random() < 0.03) { // Possibilité de blessure
+                    joueursBlesses.add(joueur);
+                    joueur.subirBlessure();
+                    joueur.diminuerEndurance(50);
+                    joueur.diminuerQualite(5);
+                
+                } else { // Si le joueur est présent
+                    joueursPresent.add(joueur);
+                    joueur.diminuerEndurance(10);
+                    joueur.augmenterQualite(20);
+                }
+            
+            } else { // Si le joueur n'a pas assez d'endurance
                 joueursAbsent.add(joueur);
                 joueur.augmenterEndurance(10);
                 joueur.diminuerQualite(5);
@@ -212,13 +242,249 @@ public class Equipe {
         }
 
         // Création de l'entraînement
-        Entrainement entrainement = Entrainement.nouvelleSeance(LocalDate.now(), joueursPresent, joueursAbsent, this);
+        Entrainement entrainement = Entrainement.nouvelleSeance(LocalDate.now(), joueursPresent, joueursAbsent, joueursBlesses, this);
 
         // Ajouter l'entraînement à l'historique des entraînements de l'équipe
         historiquesEntrainements.add(entrainement);
 
+        // Retourne une instance d'Entrainement
         return entrainement;
     }
+
+    /**
+     * trouverJoueurrPosition
+     * Trouve le joueur le mieux adapté pour une position donnée.
+     * 
+     * @param position La position pour laquelle trouver le meilleur joueur
+     * @param joueursExclus Un ensemble de joueurs à exclure de la recherche
+     * 
+     * @return Le joueur le mieux adapté pour la position, ou null si aucun joueur n'est trouvé
+     */
+    public Joueur trouverJoueurPosition(Position position, Set<Joueur> joueursExclus) {
+        Joueur meilleurJoueur = null;
+
+        // Parcours des joueurs de l'équipe
+        for (Joueur joueur : joueurs) {
+            // Création des conditions pour vérifier si le joueur est adapté à la position, est exclu, a une endurance suffisante et n'est pas blessé
+            boolean estExclu = joueursExclus.contains(joueur);
+            boolean bonnePosition = joueur.getPositions().contains(position);
+            boolean enduranceSuffisante = joueur.getEndurance() >= STAMINA_MINIMUM_MATCH;
+            boolean estBlessé = joueur.getBlessure() != null && joueur.getBlessure().estActive();
+
+            // Vérification des conditions
+            if (!estExclu && bonnePosition && enduranceSuffisante && !estBlessé) {
+                // Si le joueur est le meilleur trouvé jusqu'à présent on le mets à jour
+                if (meilleurJoueur == null || (joueur.getQualite() + joueur.getEndurance()) > (meilleurJoueur.getQualite() + meilleurJoueur.getEndurance())) {
+                    meilleurJoueur = joueur;
+                }
+            }
+        }
+
+        // Retourne le meilleur joueur trouvé ou null si aucun joueur n'est adapté
+        return meilleurJoueur;
+    }
+
+    /**
+     * trouverTitulaires
+     * Trouve les joueurs titulaires de l'équipe en fonction de leur endurance + qualité.
+     * 
+     * @throws EquipeSansJoueurException Si l'équipe n'a pas assez de joueurs pour former une équipe titulaire
+     * 
+     * @return Un ensemble de joueurs titulaires
+     */
+    public Set<Joueur> trouverTitulaires() {
+        Set<Joueur> titulaires = new LinkedHashSet<>();
+        Set<Joueur> joueurExclus = new HashSet<>();
+
+        // 1 Gardien
+        Joueur gardien = trouverJoueurPosition(Position.GB, joueurExclus);
+        if (gardien != null) {
+            titulaires.add(gardien);
+            joueurExclus.add(gardien);
+        }
+
+        // 1 Défenseur droit
+        Joueur defenseurDroit = trouverJoueurPosition(Position.DD, joueurExclus);
+        if (defenseurDroit != null) {
+            titulaires.add(defenseurDroit);
+            joueurExclus.add(defenseurDroit);
+        }
+
+        // 1 Défenseur gauche
+        Joueur defenseurGauche = trouverJoueurPosition(Position.DG, joueurExclus);
+        if (defenseurGauche != null) {
+            titulaires.add(defenseurGauche);
+            joueurExclus.add(defenseurGauche);
+        }
+
+        // 2 Défenseurs centraux
+        for (int i = 0; i < 2; i++) {
+            Joueur defenseurCentral = trouverJoueurPosition(Position.DC, joueurExclus);
+            if (defenseurCentral != null) {
+                titulaires.add(defenseurCentral);
+                joueurExclus.add(defenseurCentral);
+            }
+        }
+
+        // 3 Milieux de terrain
+        for (int i = 0; i < 3; i++) {
+            Joueur milieu = trouverJoueurPosition(Position.MC, joueurExclus);
+            if (milieu != null) {
+                titulaires.add(milieu);
+                joueurExclus.add(milieu);
+            }
+        }
+
+        // 1 Ailier droit
+        Joueur ailierDroit = trouverJoueurPosition(Position.AD, joueurExclus);
+        if (ailierDroit != null) {
+            titulaires.add(ailierDroit);
+            joueurExclus.add(ailierDroit);
+        }
+
+        // 1 Ailier gauche
+        Joueur ailierGauche = trouverJoueurPosition(Position.AG, joueurExclus);
+        if (ailierGauche != null) {
+            titulaires.add(ailierGauche);
+            joueurExclus.add(ailierGauche);
+        }
+
+        // 1 Buteur
+        Joueur buteur = trouverJoueurPosition(Position.BU, joueurExclus);
+        if (buteur != null) {
+            titulaires.add(buteur);
+            joueurExclus.add(buteur);
+        }
+
+        // Vérification si l'équipe a au moins 11 titulaires
+        if (titulaires.size() < 11) {
+            throw new EquipeSansJoueurException(nom);
+        }
+
+        // Retourne l'ensemble des joueurs titulaires
+        return titulaires;
+    }
+
+    /**
+     * trouverRemplacants
+     * Trouve les joueurs remplaçants de l'équipe.
+     * 
+     * @return Un ensemble de joueurs remplaçants
+     */
+    public Set<Joueur> trouverRemplacants(Set<Joueur> joueursTitulaires) {
+        Set<Joueur> remplacants = new LinkedHashSet<>();
+        Set<Joueur> joueursExclus = new HashSet<>(joueursTitulaires);
+
+        // Créer une liste de tous les joueurs non titulaires
+        List<Joueur> joueursNonTitulaires = new ArrayList<>();
+        for (Joueur joueur : joueurs) {
+            if (!joueursExclus.contains(joueur)) {
+                joueursNonTitulaires.add(joueur);
+            }
+        }
+
+        // Trier les joueurs non titulaires par qualité + endurance
+        joueursNonTitulaires.sort((j1, j2) -> {
+            int scoreJ1 = j1.getQualite() + j1.getEndurance();
+            int scoreJ2 = j2.getQualite() + j2.getEndurance();
+            return Integer.compare(scoreJ2, scoreJ1);
+        });
+
+        // Sélectionner jusqu'à 12 meilleurs remplaçants
+        int count = 0;
+        for (Joueur joueur : joueursNonTitulaires) {
+            if (count >= 12) {
+                break;
+            }
+            boolean enduranceSuffisante = joueur.getEndurance() >= STAMINA_MINIMUM_MATCH;
+            boolean estBlessé = joueur.getBlessure() != null && joueur.getBlessure().estActive();
+
+            if (enduranceSuffisante && !estBlessé) {
+                remplacants.add(joueur);
+                count++;
+            }
+        }
+
+        // Retourne l'ensemble des remplaçants
+        return remplacants;
+    }
+
+    /**
+     * realiserMatch
+     * Réalise un match pour l'équipe.
+     * 
+     * @throws EquipeSansEntraineurException Si l'équipe n'a pas d'entraîneur
+     * 
+     * @return Un objet Match représentant le match réalisé
+     */
+    public Match realiserMatch() {
+        // Vérification si l'équipe a un entraîneur
+        if (this.entraineur == null) {
+            throw new EquipeSansEntraineurException(nom);
+        }
+
+        // Trouver les titulaires et les remplaçants
+        Set<Joueur> titulaires = trouverTitulaires();
+        Set<Joueur> remplacants = trouverRemplacants(titulaires);
+
+        // Création d'un ensemble de tous les joueurs séléctionnés
+        Set<Joueur> joueursSelectionnes = new LinkedHashSet<>(titulaires);
+        joueursSelectionnes.addAll(remplacants);
+
+        // Trouver les absents (joueurs non sélectionnés)
+        Set<Joueur> absents = new LinkedHashSet<>(joueurs);
+        absents.removeAll(joueursSelectionnes);
+
+        // Liste pour les joueurs blessés
+        Set<Joueur> blesses = new LinkedHashSet<>();
+
+        // Diminier l'endurance et augmenté la qualité des joueurs titulaires
+        for (Joueur joueur : titulaires) {
+            if (Math.random() < 0.03) {
+                blesses.add(joueur);
+                joueur.subirBlessure();
+                joueur.diminuerEndurance(50);
+                joueur.diminuerQualite(10);
+            } else {
+                joueur.diminuerEndurance(30);
+                joueur.augmenterQualite(10);
+            }
+        }
+
+        // Diminier l'endurance et augmenté la qualité des joueurs remplaçants
+        for (Joueur joueur : remplacants) {
+            if (Math.random() < 0.01) { 
+                blesses.add(joueur);
+                joueur.subirBlessure();
+                joueur.diminuerEndurance(50);
+                joueur.diminuerQualite(10);
+            } else {
+                joueur.diminuerEndurance(30);
+                joueur.augmenterQualite(10);
+            }
+        }
+
+        // Augmenter l'endurance et diminuer la qualité des joueurs absents
+        for (Joueur joueur : absents) {
+            // Verification si le joueur est blessé
+            if (joueur.getBlessure() != null && joueur.getBlessure().estActive()) {
+                joueur.getBlessure().decrementerMatchsIndisponible();
+            }
+
+            joueur.augmenterEndurance(20);
+            joueur.diminuerQualite(5);
+        }
+
+        // Créer le match
+        Match match = Match.nouveauMatch(LocalDate.now(), titulaires, remplacants, absents, blesses, this);
+
+        // Ajouter le match à l'historique des matchs de l'équipe
+        historiquesMatchs.add(match);
+
+        // Retourne une instance de Match
+        return match;
+    }
+
 
     /**
      * toString
@@ -230,19 +496,32 @@ public class Equipe {
         StringBuilder sb = new StringBuilder();
 
         // Affichage du nom de l'équipe
-        sb.append("Équipe : \n").append(nom).append("\n");
+        sb.append("Équipe : " + nom + "\n");
 
         // Affichage de l'entraîneur
         if (entraineur != null) {
-            sb.append("Entraîneur : ").append(entraineur.toString()).append("\n");
+            sb.append("Entraîneur : " + entraineur.getNomPrenom() + "\n");
         } else {
             sb.append("Pas d'entraîneur assigné.\n");
         }
 
         // Affichage des joueurs
-        sb.append("Joueurs :\n");
-        for (Joueur joueur : joueurs) {
-            sb.append(joueur.toString()).append("\n");
+        if (joueurs.isEmpty()) {
+            sb.append("Pas de joueurs dans l'équipe.\n");
+        } else {
+            sb.append("Joueurs : \n");
+            for (Joueur joueur : joueurs) {
+                sb.append(joueur.getNomPrenom() + " " + joueur.getPositions())
+                .append(" [" + "Qualité: " + joueur.getQualite() + ", Endurance: " + joueur.getEndurance() + "]");
+
+                // Affichage de la blessure du joueur s'il en a une
+                if (joueur.getBlessure() != null) {
+                    sb.append(" [" + joueur.getBlessure().toString() + "]\n");
+                } else {
+                    sb.append("\n");
+                }
+
+            }
         }
 
         return sb.toString();
@@ -268,4 +547,7 @@ public class Equipe {
         return historiquesEntrainements;
     }
 
+    public List<Match> getHistoriquesMatchs() {
+        return historiquesMatchs;
+    }
 }

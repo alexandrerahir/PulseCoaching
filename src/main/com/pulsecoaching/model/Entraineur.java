@@ -24,7 +24,12 @@ public class Entraineur extends Personne {
         this.niveauCertification = builder.niveauCertification;
     }
 
-    // Constructeur builder
+    /**
+     * Classe EntraineurBuilder
+     * Représente le constructeur de l'entraîneur.
+     *
+     * @return Une instance d'entraîneur
+     */
     public static class EntraineurBuilder {
         private String nom;
         private String prenom;
@@ -80,6 +85,12 @@ public class Entraineur extends Personne {
         // Méthode pour construire l'objet Entraineur
         public Entraineur build() {
             Entraineur entraineur = new Entraineur(this);
+
+            if (equipe != null) {
+                entraineur.setEquipe(null);
+                equipe.ajouterEntraineur(entraineur);
+            }
+
             return entraineur;
         }
 

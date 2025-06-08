@@ -11,7 +11,6 @@ import java.time.LocalDate;
  * Représente les tests unitaires de la classe Entraineur.
  */
 public class EntraineurTest {
-    
     /**
      * testEntraineurCreation
      * Test de la création d'un entraîneur.

@@ -2,6 +2,7 @@
 package com.pulsecoaching.model;
 
 // Importation
+import com.pulsecoaching.interfaces.Entrenable;
 import com.pulsecoaching.exception.Joueur.*;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -12,12 +13,13 @@ import java.util.Set;
  * Classe Joueur
  * Représente un joueur de football.
  */
-public class Joueur extends Personne {
+public class Joueur extends Personne implements Entrenable {
     private int taille;
     private int poids;
     private int endurance;
     private int qualite;
 
+    private Blessure blessure;
     private Set<Position> positions;
 
     /**
@@ -35,7 +37,16 @@ public class Joueur extends Personne {
         this.positions = builder.positions;
     }
 
-    // Constructeur builder
+    /**
+     * Classe JoueurBuilder
+     * Représente le constructeur du joueur.
+     * 
+     * @throw JoueurTropDePositionsException si le joueur dépasse 3 positions
+     * @throw JoueurGardienAvecAutresPositionsException si le joueur a déjà la position de gardien de but
+     * @throw JoueurSansPositionException si le joueur n'a pas de position
+     *
+     * @return Une instance de Joueur
+     */
     public static class JoueurBuilder {
         private String nom;
         private String prenom;
@@ -114,6 +125,12 @@ public class Joueur extends Personne {
             // Véfication si le joueur a au moins une position
             if (positions.isEmpty()) {
                 throw new JoueurSansPositionException(nom + " " + prenom);
+            }
+
+            // Vérification si le joueur a une équipe
+            if (equipe != null) {
+                joueur.setEquipe(null);
+                equipe.ajouterJoueur(joueur);
             }
 
             return joueur;
@@ -254,6 +271,15 @@ public class Joueur extends Personne {
     }
 
     /**
+     * subirBlessure
+     * Simule une blessure du joueur en créant une nouvelle instance de Blessure.
+     */
+    public void subirBlessure() {
+        this.blessure = Blessure.nouvelleBlessure();
+    }  
+
+
+    /**
      * toString
      * Représente le joueur sous forme de chaîne de caractères.
      * 
@@ -302,6 +328,10 @@ public class Joueur extends Personne {
 
     public void setQualite(int qualite) {
         this.qualite = qualite;
+    }
+
+    public Blessure getBlessure() {
+        return blessure;
     }
 
     public Set<Position> getPositions() {

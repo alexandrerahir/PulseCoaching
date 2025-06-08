@@ -26,7 +26,7 @@ public abstract class Personne {
      * @param nationalite
      * @param equipe
      */
-    public Personne(String nom, String prenom, LocalDate naissance, String nationalite, Equipe equipe) {
+    protected Personne(String nom, String prenom, LocalDate naissance, String nationalite, Equipe equipe) {
         this.nom = nom;
         this.prenom = prenom;
         this.naissance = naissance;
@@ -60,6 +60,10 @@ public abstract class Personne {
 
     public Equipe getEquipe() {
         return equipe;
+    }
+
+    public String getNomEquipe() {
+        return equipe != null ? equipe.getNom() : "Aucune équipe";
     }
 
     public void setEquipe(Equipe equipe) {

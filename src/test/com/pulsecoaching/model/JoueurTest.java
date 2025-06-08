@@ -50,6 +50,23 @@ public class JoueurTest {
     // Tests pour les méthodes de la classe Joueur
 
     /**
+     * testCreationJoueur
+     * Test de la création d'un joueur
+     * 
+     */
+    @Test
+    public void testCreationJoueur() {
+        // Vérification des attributs du joueur
+        assertEquals("Mbappé", joueur1.getNom());
+        assertEquals("Kylian", joueur1.getPrenom());
+        assertEquals(LocalDate.of(1998, 12, 20), joueur1.getNaissance());
+        assertEquals("Française", joueur1.getNationalite());
+        assertEquals(178, joueur1.getTaille());
+        assertEquals(73, joueur1.getPoids());
+        assertTrue(joueur1.getPositions().contains(Position.BU));
+    }
+
+    /**
      * testAugmenterEndurance
      * Test de la méthode augmenterEndurance
      */
@@ -218,4 +235,15 @@ public class JoueurTest {
         assertThrows(JoueurSansPositionException.class, () -> joueur1.retirerPosition(Position.BU));
     }
 
+    /**
+     * testSubirBlessure
+     * Test de la méthode subirBlessure
+     */
+    @Test
+    public void testSubirBlessure() {
+        joueur1.subirBlessure();
+
+        // Vérification que le joueur est blessé
+        assertNotNull(joueur1.getBlessure());
+    }
 }
