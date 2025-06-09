@@ -79,6 +79,7 @@ public class Match {
         for (Joueur joueur : titulaires) {
             sb.append(joueur.getNomPrenom()).append(", ");
         }
+        sb.setLength(sb.length() - 2);
 
         // Affichage des remplaçants
         if (remplaçants.isEmpty()) {
@@ -88,6 +89,7 @@ public class Match {
             for (Joueur joueur : remplaçants) {
                 sb.append(joueur.getNomPrenom()).append(", ");
             }
+            sb.setLength(sb.length() - 2);
         }
 
         // Affichage des absents

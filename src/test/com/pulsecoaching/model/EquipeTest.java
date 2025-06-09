@@ -8,7 +8,6 @@ import org.junit.Before;
 import static org.junit.Assert.*;
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Class EquipeTest
@@ -307,5 +306,30 @@ public class EquipeTest {
         assertThrows(EquipeSansJoueurException.class, () -> equipe1.trouverTitulaires());
     }
 
+    @Test
+    public void testRealiserRepos() {
+        // Ajout de joueurs à l'équipe 1
+        equipe1.ajouterJoueur(joueur1);
+        equipe1.ajouterJoueur(joueur2);
     
+        // Modification de la qualité et de l'endurance des joueurs pour simuler un repos
+        joueur1.augmenterQualite(10);
+        joueur1.diminuerEndurance(50);
+        joueur2.augmenterQualite(10);
+        joueur2.diminuerEndurance(50);
+
+        // Réalisation du repos
+        equipe1.realiserRepos();
+
+        // Vérification que les joueurs ont récupéré de l'endurance
+        assertTrue(joueur1.getEndurance() == 70);
+        assertTrue(joueur2.getEndurance() == 70);
+
+        // Vérification que les joueurs ont perdu de la qualité
+        assertTrue(joueur1.getQualite() == 5);
+        assertTrue(joueur2.getQualite() == 5);
+
+    }
+
+
 }

@@ -485,6 +485,27 @@ public class Equipe {
         return match;
     }
 
+    /**
+     * realiserRepos
+     * Permet aux joueurs de l'équipe de récupérer de l'endurance.
+     * 
+     * @throws EquipeSansJoueurException Si l'équipe n'a pas de joueurs
+     */
+    public void realiserRepos() {
+        // Vérification si l'équipe a des joueurs
+        if (this.joueurs.isEmpty()) {
+            throw new EquipeSansJoueurException(nom);
+        }
+
+        // Parcours des joueurs pour leur faire récupérer de l'endurance
+        for (Joueur joueur : joueurs) {
+            // Vérification si le joueur n'est pas blessé
+            if (joueur.getBlessure() == null || !joueur.getBlessure().estActive()) {
+                joueur.augmenterEndurance(20);
+                joueur.diminuerQualite(5);
+            }
+        }
+    }
 
     /**
      * toString
